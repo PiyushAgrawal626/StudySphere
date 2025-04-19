@@ -107,7 +107,6 @@
             </select>
             <br><br>
             <input type="file" id="fileInput"><br><br>
-            <input type="text" id="tagsInput" placeholder="Enter tags (comma-separated)">
             <button onclick="uploadFile()">Upload</button>
         </div>
 
@@ -119,37 +118,33 @@
         </div>
     </div>
 
-
     <script>
         const bucketName = "studyspherewd";
-        const tagsFileName = "tags.json";
-    
+
         async function uploadFile() {
             const fileInput = document.getElementById("fileInput");
             const folderSelect = document.getElementById("folderSelect");
-            const tagsInput = document.getElementById("tagsInput");
             const file = fileInput.files[0];
-    
+
             if (!file) {
                 alert("Please select a file");
                 return;
             }
-    
+
             let folder = folderSelect.value;
             if (folder && !folder.endsWith("/")) folder += "/";
-    
+
             const objectName = folder + file.name;
             const uploadUrl = `https://storage.googleapis.com/upload/storage/v1/b/${bucketName}/o?uploadType=media&name=${encodeURIComponent(objectName)}`;
-    
+
             const res = await fetch(uploadUrl, {
                 method: "POST",
                 headers: { "Content-Type": file.type },
                 body: file
             });
-    
+
             if (res.ok) {
-                await updateTagsFile(objectName, tagsInput.value);
-                alert("File and tags uploaded!");
+                alert("File uploaded!");
                 listFiles();
                 listFolders();
             } else {
@@ -157,60 +152,26 @@
                 console.error(await res.text());
             }
         }
-    
-        async function updateTagsFile(fileName, tagsString) {
-            const tagsUrl = `https://storage.googleapis.com/storage/v1/b/${bucketName}/o/${encodeURIComponent(tagsFileName)}?alt=media`;
-    
-            let tags = {};
-    
-            try {
-                const res = await fetch(tagsUrl);
-                if (res.ok) {
-                    tags = await res.json();
-                }
-            } catch (e) {
-                console.warn("tags.json not found. Creating a new one.");
-            }
-    
-            const cleanedTags = tagsString.split(",").map(t => t.trim()).filter(t => t);
-            tags[fileName] = cleanedTags;
-    
-            // Upload updated tags.json
-            const uploadUrl = `https://storage.googleapis.com/upload/storage/v1/b/${bucketName}/o?uploadType=media&name=${tagsFileName}`;
-            await fetch(uploadUrl, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(tags)
-            });
-        }
-    
+
         async function listFiles() {
             const res = await fetch(`https://storage.googleapis.com/storage/v1/b/${bucketName}/o`);
             const data = await res.json();
-    
-            const tagsMap = await getTagsMap();
-    
+
             const fileList = document.getElementById("fileList");
             fileList.innerHTML = "";
-    
+
             if (data.items) {
                 data.items.forEach(item => {
-                    if (!item.name.endsWith("/") && item.name !== tagsFileName) {
+                    if (!item.name.endsWith("/")) {
                         const card = document.createElement("div");
                         card.className = "file-card";
-    
+
                         const link = document.createElement("a");
                         link.href = `https://storage.googleapis.com/${bucketName}/${item.name}`;
                         link.textContent = item.name;
                         link.target = "_blank";
-    
-                        const tags = tagsMap[item.name] || [];
-                        const tagDisplay = document.createElement("div");
-                        tagDisplay.textContent = `Tags: ${tags.join(", ")}`;
-    
+
                         card.appendChild(link);
-                        card.appendChild(document.createElement("br"));
-                        card.appendChild(tagDisplay);
                         fileList.appendChild(card);
                     }
                 });
@@ -218,26 +179,17 @@
                 fileList.innerHTML = "<p>No files found.</p>";
             }
         }
-    
-        async function getTagsMap() {
-            try {
-                const res = await fetch(`https://storage.googleapis.com/storage/v1/b/${bucketName}/o/${encodeURIComponent(tagsFileName)}?alt=media`);
-                return await res.json();
-            } catch {
-                return {};
-            }
-        }
-    
+
         function createFolder() {
             const folderName = document.getElementById("folderInput").value.trim();
             if (!folderName) {
                 alert("Folder name cannot be empty");
                 return;
             }
-    
+
             const folderPath = folderName.endsWith("/") ? folderName : folderName + "/";
             const url = `https://storage.googleapis.com/upload/storage/v1/b/${bucketName}/o?uploadType=media&name=${encodeURIComponent(folderPath)}`;
-    
+
             fetch(url, {
                 method: "POST",
                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -251,21 +203,21 @@
                 }
             });
         }
-    
+
         async function listFolders() {
             const res = await fetch(`https://storage.googleapis.com/storage/v1/b/${bucketName}/o`);
             const data = await res.json();
-    
+
             const folders = new Set();
             const folderSelect = document.getElementById("folderSelect");
             folderSelect.innerHTML = '<option value="">(root)</option>';
-    
+
             if (data.items) {
                 data.items.forEach(item => {
                     const parts = item.name.split("/");
                     if (parts.length > 1) folders.add(parts[0]);
                 });
-    
+
                 folders.forEach(folder => {
                     const option = document.createElement("option");
                     option.value = folder;
@@ -274,31 +226,26 @@
                 });
             }
         }
-    
-        async function filterFiles() {
+
+        function filterFiles() {
             const searchTerm = document.getElementById("searchInput").value.toLowerCase();
-            const tagsMap = await getTagsMap();
             const fileCards = document.querySelectorAll(".file-card");
-    
+
             fileCards.forEach(card => {
                 const fileName = card.querySelector("a").textContent.toLowerCase();
-                const tags = tagsMap[fileName] || [];
-                const tagsMatch = tags.some(tag => tag.toLowerCase().includes(searchTerm));
-    
-                if (fileName.includes(searchTerm) || tagsMatch) {
+                if (fileName.includes(searchTerm)) {
                     card.style.display = "block";
                 } else {
                     card.style.display = "none";
                 }
             });
         }
-    
+
         window.onload = () => {
             listFiles();
             listFolders();
         };
     </script>
-    
 </body>
 
 </html>
