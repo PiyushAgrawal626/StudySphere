@@ -119,7 +119,6 @@
         document.getElementById('signupForm').addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Clear previous errors
             document.querySelectorAll('.error').forEach(el => {
                 el.style.display = 'none';
                 el.textContent = '';
@@ -144,7 +143,6 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Store user data and redirect to login
                     alert('Account created successfully! Please login.');
                     window.location.href = 'login.html';
                 } else {
