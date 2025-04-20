@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StudySphere Dashboard</title>
     <style>
-        /* --- Global Styles & Reset --- */
         *,
         *::before,
         *::after {
@@ -24,10 +23,8 @@
             flex-direction: column;
             min-height: 100vh;
             text-align: center;
-            /* Centralize content */
         }
 
-        /* --- Layout Containers --- */
         .container {
             max-width: 1140px;
             margin: 0 auto;
@@ -35,7 +32,6 @@
             width: 100%;
         }
 
-        /* --- Header Styles --- */
         header {
             background-color: #4a69bd;
             color: #ffffff;
@@ -57,7 +53,7 @@
             opacity: 0.9;
         }
 
-        /* --- Section Styles --- */
+
         section {
             background-color: #ffffff;
             padding: 25px 30px;
@@ -75,7 +71,6 @@
             text-align: center;
         }
 
-        /* --- Sync Buttons --- */
         .sync-buttons {
             display: flex;
             justify-content: center;
@@ -107,20 +102,16 @@
 
         .lms-button {
             background-color: #e74c3c;
-            /* Red */
         }
 
         .teams-button {
             background-color: #3498db;
-            /* Blue */
         }
 
         .vpropel-button {
             background-color: #2ecc71;
-            /* Green */
         }
 
-        /* --- Modal Styles --- */
         .modal {
             display: none;
             position: fixed;
@@ -182,7 +173,6 @@
             border-top: 1px solid #dee2e6;
         }
 
-        /* Form Styles */
         .form-group {
             margin-bottom: 15px;
             text-align: left;
@@ -238,7 +228,6 @@
             background-color: #5a6268;
         }
 
-        /* --- Assignments Section --- */
         #assignments-container h2 {
             border-bottom: 1px solid #eee;
             padding-bottom: 0.75rem;
@@ -251,7 +240,6 @@
             padding-top: 1rem;
         }
 
-        /* Placeholder/Message Styling */
         .loading,
         .error,
         .info {
@@ -269,7 +257,7 @@
             font-weight: 500;
         }
 
-        /* --- Individual Assignment Card Styles --- */
+
         .assignment {
             background-color: #ffffff;
             border-radius: 8px;
@@ -323,43 +311,32 @@
             margin-bottom: 0;
         }
 
-        /* Urgent Assignment Styling - Less than 1 day remaining */
         .assignment.urgent {
             background-color: #ffebee;
-            /* Light red background */
             border-left-color: #d32f2f;
-            /* Strong red left border */
             box-shadow: 0 4px 12px rgba(211, 47, 47, 0.15);
-            /* Red-tinted shadow */
             animation: urgentPulse 2s infinite;
-            /* Add pulsing animation */
         }
 
         .assignment.urgent h3 {
             color: #c62828;
-            /* Darker red for the title */
         }
 
         .assignment.urgent .due-date {
             color: #d32f2f;
-            /* Red for the due date */
             font-weight: 700;
         }
 
         .assignment.urgent .countdown-timer {
             background-color: rgba(211, 47, 47, 0.1);
-            /* Light red background */
             border-left: 3px solid #d32f2f;
-            /* Red left border */
         }
 
         .assignment.urgent .countdown-timer span {
             color: #d32f2f;
-            /* All timer elements are red */
             font-weight: bold;
         }
 
-        /* Urgent Badge */
         .urgent-badge {
             display: inline-block;
             background-color: #d32f2f;
@@ -373,7 +350,6 @@
             letter-spacing: 0.5px;
         }
 
-        /* Pulsing Animation for Urgent Assignments */
         @keyframes urgentPulse {
             0% {
                 border-left-color: #d32f2f;
@@ -388,7 +364,6 @@
             }
         }
 
-        /* Countdown Timer Styling */
         .countdown-timer {
             display: flex;
             justify-content: center;
@@ -430,7 +405,6 @@
             letter-spacing: 1px;
         }
 
-        /* --- Footer --- */
         footer {
             text-align: center;
             padding: 1.5rem;
@@ -441,7 +415,6 @@
             border-top: 1px solid #dee2e6;
         }
 
-        /* --- Animations --- */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -464,13 +437,10 @@
             }
         }
 
-        /* --- Todo List Button --- */
         .todo-button {
             background-color: #9b59b6;
-            /* Purple */
         }
 
-        /* --- Responsive Adjustments --- */
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8em;
@@ -513,7 +483,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <h1>StudySphere</h1>
@@ -521,9 +490,7 @@
         </div>
     </header>
 
-    <!-- Main Content Area -->
     <main class="container">
-        <!-- Sync Buttons Section -->
         <section>
             <h2>Sync Your Assignments</h2>
             <p>Click on a platform to sync your assignments</p>
@@ -536,24 +503,20 @@
             </div>
         </section>
 
-        <!-- Assignments Section -->
         <section id="assignments-container">
             <h2>Assignments</h2>
             <div id="assignments-list">
                 <p class="info">Click on a sync button above to load assignments.</p>
-                <!-- Assignments will be loaded here -->
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p>&copy; 2025 StudySphere. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Modal for LMS Login -->
     <div id="lms-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -579,7 +542,6 @@
         </div>
     </div>
 
-    <!-- Modal for Teams Login -->
     <div id="teams-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -605,7 +567,6 @@
         </div>
     </div>
 
-    <!-- Modal for vpropel Login -->
     <div id="vpropel-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -631,7 +592,6 @@
         </div>
     </div>
 
-    <!-- Modal for Todo Task -->
     <div id="todo-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
@@ -662,7 +622,7 @@
     </div>
 
     <script>
-        const vercelBaseUrl = 'https://consolodated-assignment.vercel.app'; // Your Vercel deployment URL
+        const vercelBaseUrl = 'https://consolodated-assignment.vercel.app'; // Vercel deployment URL
 
         const platforms = [
             { name: 'LMS', idPrefix: 'lms', path: '/lms/LMS.json' },
@@ -670,10 +630,7 @@
             { name: 'vpropel', idPrefix: 'vpropel', path: '/vpropel/vpropel.json' }
         ];
 
-        // Initialize todo tasks array - no longer using localStorage
         let todoTasks = [];
-
-        // Store all fetched assignments by platform
         let allAssignments = {
             'LMS': [],
             'Teams': [],
@@ -681,19 +638,13 @@
             'Todo': []
         };
 
-        // Modal functions
         function openModal(modalId) {
             document.getElementById(modalId).style.display = 'block';
-            // Focus on username field or title field
             if (modalId === 'todo-modal') {
                 document.getElementById('todo-title').focus();
-
-                // Set default due date to tomorrow
                 const tomorrow = new Date();
                 tomorrow.setDate(tomorrow.getDate() + 1);
                 tomorrow.setHours(23, 59);
-
-                // Format for datetime-local input
                 const year = tomorrow.getFullYear();
                 const month = String(tomorrow.getMonth() + 1).padStart(2, '0');
                 const day = String(tomorrow.getDate()).padStart(2, '0');
@@ -711,14 +662,12 @@
             document.getElementById(modalId).style.display = 'none';
         }
 
-        // Close modal when clicking outside
         window.onclick = function (event) {
             if (event.target.classList.contains('modal')) {
                 event.target.style.display = 'none';
             }
         };
 
-        // Handle login for a specific platform
         function handleLogin(platform) {
             const usernameInput = document.getElementById(`${platform}-username`);
             const passwordInput = document.getElementById(`${platform}-password`);
@@ -735,15 +684,10 @@
                 alert('Please enter both username and password.');
                 return;
             }
-
-            // Close the modal
             closeModal(`${platform}-modal`);
-
-            // Fetch assignments for this platform
             fetchPlatformAssignments(platform);
         }
 
-        // Function to add todo task
         async function addTodoTask() {
             const titleInput = document.getElementById('todo-title');
             const descriptionInput = document.getElementById('todo-description');
@@ -783,12 +727,8 @@
                 if (!response.ok) {
                     throw new Error(data.message || 'Failed to add task');
                 }
-
-                // Close the modal
                 closeModal('todo-modal');
                 document.getElementById('todo-form').reset();
-
-                // Refresh the tasks list
                 await fetchUserTodoTasks(user.id);
 
             } catch (error) {
@@ -797,7 +737,6 @@
             }
         }
 
-        // Function to fetch user's todo tasks
         async function fetchUserTodoTasks(userId) {
             try {
                 const response = await fetch(`/api/todo/${userId}`);
@@ -806,8 +745,6 @@
                 if (!response.ok) {
                     throw new Error(data.message || 'Failed to fetch tasks');
                 }
-
-                // Update allAssignments with fetched tasks
                 allAssignments['Todo'] = data.tasks.map(task => ({
                     subject: task.title,
                     content: task.description,
@@ -816,31 +753,23 @@
                     id: task._id
                 }));
 
-                // Display all assignments including the new todo
                 displayAllAssignments();
 
             } catch (error) {
                 console.error('Error fetching tasks:', error);
-                // Still show assignments from other platforms
                 displayAllAssignments();
             }
         }
 
-        // Display all assignments from all platforms
         function displayAllAssignments() {
-            // Combine all assignments from all platforms
             let combinedAssignments = [];
-
-            // Add assignments from each platform
             for (const platform in allAssignments) {
                 combinedAssignments = combinedAssignments.concat(allAssignments[platform]);
             }
 
-            // Display the combined assignments
             displayAssignments(combinedAssignments);
         }
 
-        // Fetch assignments for a specific platform
         async function fetchPlatformAssignments(platformPrefix) {
             const assignmentsListElement = document.getElementById('assignments-list');
             assignmentsListElement.innerHTML = '<p class="loading">Fetching assignments...</p>';
@@ -855,33 +784,20 @@
             try {
                 const data = await fetchJSON(vercelBaseUrl + platform.path);
                 if (data && data.assignments && Array.isArray(data.assignments)) {
-                    // Add platform name to each assignment
                     const assignments = data.assignments.map(a => ({ ...a, platform: platform.name }));
-
-                    // Store these assignments for this platform
                     allAssignments[platform.name] = assignments;
-
-                    // Display all assignments from all platforms
                     displayAllAssignments();
                 } else {
                     console.warn(`No valid assignments data received for ${platform.name}`);
-                    // Clear this platform's assignments
                     allAssignments[platform.name] = [];
-
-                    // Still show assignments from other platforms
                     displayAllAssignments();
                 }
             } catch (error) {
                 console.error(`Failed to fetch assignments for ${platform.name}:`, error);
-                // Clear this platform's assignments on error
                 allAssignments[platform.name] = [];
-
-                // Still show assignments from other platforms
                 displayAllAssignments();
             }
         }
-
-        // Function to fetch JSON data
         async function fetchJSON(url) {
             try {
                 const response = await fetch(url);
@@ -896,7 +812,6 @@
             }
         }
 
-        // Function to display assignments
         function displayAssignments(assignments) {
             const assignmentsList = document.getElementById('assignments-list');
             if (!assignmentsList) return;
@@ -947,8 +862,6 @@
                 `;
             });
             assignmentsList.innerHTML = html;
-
-            // Start the countdown timers after adding assignments to the DOM
             startCountdownTimers();
         }
 
@@ -974,7 +887,6 @@
                     throw new Error(data.message || 'Failed to delete task');
                 }
 
-                // Refresh the tasks list
                 await fetchUserTodoTasks(user.id);
 
             } catch (error) {
@@ -983,18 +895,15 @@
             }
         }
 
-        // Initialize the page by fetching todo tasks if user is logged in
         document.addEventListener('DOMContentLoaded', async () => {
             const user = JSON.parse(localStorage.getItem('user'));
             if (user && user.id) {
                 await fetchUserTodoTasks(user.id);
             }
         });
-        // Function to start all countdown timers
+
         function startCountdownTimers() {
             const timerElements = document.querySelectorAll('.countdown-timer');
-
-            // Clear any existing intervals to prevent memory leaks
             if (window.countdownIntervals) {
                 window.countdownIntervals.forEach(interval => clearInterval(interval));
             }
@@ -1003,11 +912,7 @@
 
             timerElements.forEach(timerElement => {
                 const dueTime = parseInt(timerElement.getAttribute('data-due'));
-
-                // Update immediately once
                 updateCountdown(timerElement, dueTime);
-
-                // Then update every second
                 const intervalId = setInterval(() => {
                     updateCountdown(timerElement, dueTime);
                 }, 1000);
@@ -1016,41 +921,33 @@
             });
         }
 
-        // Function to update a single countdown timer
         function updateCountdown(timerElement, dueTime) {
             const currentTime = new Date().getTime();
             const timeRemaining = dueTime - currentTime;
 
             if (timeRemaining <= 0) {
-                // Assignment is past due
                 timerElement.innerHTML = '<span class="expired">EXPIRED</span>';
                 return;
             }
 
-            // Calculate days, hours, minutes, seconds
             const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
             const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
-
-            // Update the timer display
             timerElement.querySelector('.days').textContent = `${days}d`;
             timerElement.querySelector('.hours').textContent = `${hours}h`;
             timerElement.querySelector('.minutes').textContent = `${minutes}m`;
             timerElement.querySelector('.seconds').textContent = `${seconds}s`;
         }
-
-        // Clean up intervals when page unloads
         window.addEventListener('beforeunload', () => {
             if (window.countdownIntervals) {
                 window.countdownIntervals.forEach(interval => clearInterval(interval));
             }
         });
 
-        // Add keyboard event listeners for accessibility
+
         document.addEventListener('keydown', function (event) {
             if (event.key === 'Escape') {
-                // Close any open modals when Escape key is pressed
                 document.querySelectorAll('.modal').forEach(modal => {
                     if (modal.style.display === 'block') {
                         modal.style.display = 'none';
@@ -1059,10 +956,7 @@
             }
         });
 
-        // Initialize allAssignments with todo tasks
         allAssignments['Todo'] = todoTasks;
     </script>
-
 </body>
-
 </html>
