@@ -134,11 +134,8 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
-            /* Added */
             flex-direction: column;
-            /* Added */
             height: 100%;
-            /* Ensures equal height */
         }
 
         .course-card:hover {
@@ -150,22 +147,16 @@
             height: 200px;
             overflow: hidden;
             position: relative;
-            /* Added for better control */
         }
 
         .course-image img {
             width: 100%;
             height: 100%;
             object-fit: contain;
-            /* Changed from cover to contain for consistent display */
             object-position: center;
-            /* Ensures centered alignment */
             background-color: #f8f9fa;
-            /* Adds a light background for transparent images */
             padding: 20px;
-            /* Gives some breathing room around the image */
             box-sizing: border-box;
-            /* Ensures padding is included in dimensions */
             transition: transform 0.5s ease;
         }
 
@@ -176,11 +167,8 @@
         .course-content {
             padding: 20px;
             flex-grow: 1;
-            /* Makes content fill remaining space */
             display: flex;
-            /* Added */
             flex-direction: column;
-            /* Added */
         }
 
         .course-category {
@@ -207,7 +195,6 @@
 
         .course-meta {
             margin-top: auto;
-            /* Pushes meta to bottom */
         }
 
         .course-duration {
@@ -224,17 +211,13 @@
             transition: background 0.3s ease;
             font-weight: bold;
             text-decoration: none;
-            /* Added to remove underline */
             display: inline-block;
-            /* Added for proper button sizing */
             text-align: center;
-            /* Added for text alignment */
         }
 
         .enroll-btn:hover {
             background: #f39c12;
             color: white;
-            /* Ensure text stays white on hover */
         }
 
         .roadmap-card {
@@ -407,7 +390,6 @@
             background-color: #e67e22;
         }
 
-        /* Courses Slider Styles */
         .courses-slider {
             position: relative;
             margin: 40px auto;
@@ -450,7 +432,6 @@
             right: 10px;
         }
 
-        /* Hide extra courses initially */
         .course-card {
             min-width: calc(33.333% - 20px);
             flex: 0 0 calc(33.333% - 20px);
@@ -495,12 +476,10 @@
             </p>
         </div>
 
-        <!-- Add this inside your courses-container div, after the page-header -->
         <h2 class="section-title">Featured Online Courses</h2>
         <div class="courses-slider">
             <button class="slider-arrow left-arrow">&larr;</button>
             <div class="courses-slides">
-                <!-- Course 1 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="01-Modern-JavaScript.webp" alt="JavaScript Course">
@@ -517,7 +496,6 @@
                     </div>
                 </div>
 
-                <!-- Course 2 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="React.png" alt="React Course">
@@ -534,7 +512,6 @@
                     </div>
                 </div>
 
-                <!-- Course 3 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="nodejs.webp" alt="Node.js Course">
@@ -551,7 +528,6 @@
                     </div>
                 </div>
 
-                <!-- Course 4 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="Data-structures-and-algorithms-new.webp" alt="DSA Course">
@@ -568,10 +544,10 @@
                     </div>
                 </div>
 
-                <!-- Course 5 -->
                 <div class="course-card">
                     <div class="course-image">
-                        <img src="what-is-machine-learning-and-machine-learning-techniques-67bc2a273a4f0-e1740981449660.webp" alt="Machine Learning">
+                        <img src="what-is-machine-learning-and-machine-learning-techniques-67bc2a273a4f0-e1740981449660.webp"
+                            alt="Machine Learning">
                     </div>
                     <div class="course-content">
                         <span class="course-category">AI/ML</span>
@@ -585,7 +561,6 @@
                     </div>
                 </div>
 
-                <!-- Course 6 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="images.png" alt="DevOps">
@@ -601,8 +576,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Course 7 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="app-development-banner_33099-1720.avif" alt="Android Development">
@@ -619,7 +592,6 @@
                     </div>
                 </div>
 
-                <!-- Course 8 -->
                 <div class="course-card">
                     <div class="course-image">
                         <img src="360_F_245636933_kY23ohGptK5t6n8wGSXIgLgVXWeHJRct.jpg" alt="Cybersecurity">
@@ -640,7 +612,6 @@
         </div>
         <h2 class="section-title">Study Roadmaps</h2>
         <div class="courses-grid">
-            <!-- Java Roadmap -->
             <div class="roadmap-card">
                 <h3 class="roadmap-title"><i class="fab fa-java"></i> Java Developer Roadmap</h3>
                 <ul class="roadmap-steps">
@@ -657,7 +628,6 @@
                 <a href="java-roadmap.html" class="view-roadmap">View Full Roadmap →</a>
             </div>
 
-            <!-- Linux Roadmap -->
             <div class="roadmap-card">
                 <h3 class="roadmap-title"><i class="fab fa-linux"></i> Linux Administration Path</h3>
                 <ul class="roadmap-steps">
@@ -671,7 +641,6 @@
                 <a href="linux-roadmap.html" class="view-roadmap">View Full Roadmap →</a>
             </div>
 
-            <!-- SQL Roadmap -->
             <div class="roadmap-card">
                 <h3 class="roadmap-title"><i class="fas fa-database"></i> SQL Mastery Program</h3>
                 <ul class="roadmap-steps">
@@ -694,7 +663,6 @@
     </div>
 
     <script>
-        // Check if user is logged in
         document.addEventListener('DOMContentLoaded', function () {
             const user = JSON.parse(localStorage.getItem('user'));
             const authButtons = document.getElementById('authButtons');
@@ -715,57 +683,51 @@
                 dropdownEmail.textContent = user.email;
             }
 
-            // Profile dropdown toggle
             profileIcon.addEventListener('click', function (e) {
                 e.stopPropagation();
                 profileDropdown.classList.toggle('show');
             });
 
-            // Close dropdown when clicking outside
             document.addEventListener('click', function () {
                 profileDropdown.classList.remove('show');
             });
 
-            // Logout functionality
             document.getElementById('logoutBtn').addEventListener('click', function () {
                 localStorage.removeItem('user');
                 window.location.href = 'login.html';
             });
         });
     </script>
-  <!-- Update your JavaScript section with this code -->
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const slider = document.querySelector('.courses-slides');
-        const cards = document.querySelectorAll('.course-card');
-        const leftArrow = document.querySelector('.left-arrow');
-        const rightArrow = document.querySelector('.right-arrow');
-        let currentIndex = 0;
-        const cardsPerView = 3;
-        const totalCards = cards.length;
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const slider = document.querySelector('.courses-slides');
+            const cards = document.querySelectorAll('.course-card');
+            const leftArrow = document.querySelector('.left-arrow');
+            const rightArrow = document.querySelector('.right-arrow');
+            let currentIndex = 0;
+            const cardsPerView = 3;
+            const totalCards = cards.length;
 
-        function updateSlider() {
-            const cardWidth = cards[0].offsetWidth + 30; // width + gap
-            slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-        }
+            function updateSlider() {
+                const cardWidth = cards[0].offsetWidth + 30;
+                slider.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+            }
 
-        leftArrow.addEventListener('click', () => {
-            currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+            leftArrow.addEventListener('click', () => {
+                currentIndex = (currentIndex - 1 + totalCards) % totalCards;
+                updateSlider();
+            });
+
+            rightArrow.addEventListener('click', () => {
+                currentIndex = (currentIndex + 1) % totalCards;
+                updateSlider();
+            });
+
             updateSlider();
-        });
 
-        rightArrow.addEventListener('click', () => {
-            currentIndex = (currentIndex + 1) % totalCards;
-            updateSlider();
+            window.addEventListener('resize', updateSlider);
         });
-
-        // Initialize
-        updateSlider();
-        
-        // Handle window resize
-        window.addEventListener('resize', updateSlider);
-    });
-</script>
+    </script>
 </body>
 
 </html>
