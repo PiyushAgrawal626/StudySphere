@@ -7,7 +7,7 @@ app = Flask(__name__, template_folder='public', static_folder='public/static')
 CORS(app)  # Enable CORS for all routes
 
 # OpenRouter API configuration
-OPENROUTER_API_KEY = "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"
+OPENROUTER_API_KEY = "sk-or-v1-b78ac3cdf8d88aaa07116523c4c62ccac30d96bde8b****************"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 
 # Store conversation history
