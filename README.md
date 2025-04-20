@@ -1,3 +1,6 @@
+GitHub link to consolidated website: https://github.com/Preygle/consolodated-assignment
+
+
 Team Members
 Piyush Agrawal (23BCE1740)
 
