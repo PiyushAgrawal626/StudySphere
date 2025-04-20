@@ -119,7 +119,6 @@
             };
 
             try {
-                // Use relative path since we're serving from same origin
                 const response = await fetch('/api/login', {
                     method: 'POST',
                     headers: {
@@ -134,7 +133,6 @@
                     throw new Error(data.message || 'Login failed');
                 }
 
-                // Store user data and redirect
                 localStorage.setItem('user', JSON.stringify(data.user));
                 window.location.href = '/studysphere.html';
 
