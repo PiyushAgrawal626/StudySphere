@@ -28,7 +28,6 @@
       <div style="display: flex;">
         <div class="streak-container-nav" id="streakIndicator" style="display: none">
           <div class="streak-progress-circle" data-weekly-goal="7" data-weekly-progress="0">
-            <!-- Weekly Goal: 7 days -->
             <div class="streak-inner-circle">
               <span class="streak-count" id="dailyStreakCount">0</span>
               <span class="streak-label"></span>
@@ -71,10 +70,8 @@
     </div>
 
     <div class="chat-messages" id="chatMessages">
-      <!-- Messages will be added here dynamically -->
     </div>
 
-    <!-- Typing indicator -->
     <div id="typing-indicator" class="typing-indicator" style="display: none;">
       <div class="message bot-message">
         <div class="message-avatar">
@@ -185,10 +182,8 @@
       if (!user) return;
 
       try {
-        // Get user's timezone
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-        // Fetch and update streak
         const response = await fetch(
           `/api/streak?userId=${user.id}&timezone=${encodeURIComponent(
             timezone
@@ -199,7 +194,6 @@
         if (data.success) {
           updateStreakUI(data.streak);
 
-          // Store updated streak in localStorage
           const updatedUser = { ...user, streak: data.streak };
           localStorage.setItem("user", JSON.stringify(updatedUser));
         }
@@ -209,13 +203,11 @@
     });
 
     function updateStreakUI(streakData) {
-      // Update streak counter
       document.getElementById("current-streak").textContent =
         streakData.current;
       document.getElementById("longest-streak").textContent =
         streakData.longest;
 
-      // Update calendar visualization
       const calendar = document.querySelector(".streak-calendar");
       calendar.innerHTML = "";
 
@@ -244,7 +236,6 @@
         calendar.appendChild(dayElement);
       }
 
-      // Update progress bar
       const progress = Math.min(100, (streakData.current / 7) * 100);
       document.querySelector(".streak-progress").style.width = `${progress}%`;
       document.querySelector(
@@ -359,7 +350,7 @@
       const streakIndicator = document.getElementById("streakIndicator");
       const dailyStreakCountEl = document.getElementById("dailyStreakCount");
       const streakProgressCircleEl = document.querySelector(".streak-progress-circle");
-      const streakIndicatorNav = document.getElementById("streakIndicator"); // Navbar element ID
+      const streakIndicatorNav = document.getElementById("streakIndicator"); 
       const streakTargetSection = document.getElementById('streak-container');
 
       const stars = document.querySelectorAll('.star');
@@ -372,11 +363,9 @@
           return;
         }
 
-        // Get user's timezone
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC';
 
         try {
-          // Fetch DAILY streak data from your backend
           const response = await fetch(`/api/streak?userId=${user.id}&timezone=${timezone}`);
           if (!response.ok) {
             throw new Error(`Streak API Error: ${response.statusText}`);
@@ -386,53 +375,40 @@
           if (data.success && data.streak) {
             const dailyStreak = data.streak.current || 0;
 
-            // --- !!! SIMULATION FOR WEEKLY PROGRESS !!! ---
-            // TODO: Replace this simulation with actual data from your backend
-            // You'll need to modify your backend (server.js) and User schema
-            // to store and retrieve weekly progress (e.g., days active this week).
+
             const weeklyGoal = parseInt(streakProgressCircleEl.getAttribute('data-weekly-goal')) || 7;
-            // Example: Simulate progress based on daily streak (very basic)
             const currentWeeklyProgress = Math.min(dailyStreak, weeklyGoal);
-            // --- !!! END SIMULATION !!! ---
 
 
-            // Update the display
             updateStreakDisplay(dailyStreak, currentWeeklyProgress, weeklyGoal);
 
-            // Show the streak indicator
             if (streakIndicator) {
-              streakIndicator.style.display = 'flex'; // Or 'block' if preferred
+              streakIndicator.style.display = 'flex'; 
             }
 
           } else {
             console.error("Failed to get streak data:", data.message);
-            // Optionally hide or show default state for streak indicator
             if (streakIndicator) streakIndicator.style.display = 'none';
           }
         } catch (error) {
           console.error("Error fetching or processing streak:", error);
-          if (streakIndicator) streakIndicator.style.display = 'none'; // Hide on error
+          if (streakIndicator) streakIndicator.style.display = 'none'; 
         }
       }
 
-      // --- NEW: Function to update the visual elements ---
       function updateStreakDisplay(dailyCount, weeklyProgress, weeklyGoal) {
         if (!dailyStreakCountEl || !streakProgressCircleEl) return;
 
-        // Update daily streak number
         dailyStreakCountEl.textContent = dailyCount;
 
-        // Calculate weekly percentage
-        const goal = weeklyGoal > 0 ? weeklyGoal : 1; // Avoid division by zero
-        const progress = Math.max(0, Math.min(weeklyProgress, goal)); // Clamp progress
+        const goal = weeklyGoal > 0 ? weeklyGoal : 1; 
+        const progress = Math.max(0, Math.min(weeklyProgress, goal)); 
         const percentage = (progress / goal) * 100;
 
-        // Update the data attribute (optional, but good practice)
         streakProgressCircleEl.setAttribute('data-weekly-progress', progress);
 
-        // Update the conic gradient background for the progress ring
-        const progressColor = "#007bff";  // Green for progress
-        const backgroundColor = "black"; // Background for the unfilled part
+        const progressColor = "#007bff";  
+        const backgroundColor = "black"; 
         streakProgressCircleEl.style.background = `
       conic-gradient(
         ${progressColor} ${percentage}%,
@@ -442,7 +418,7 @@
       }
       if (user) {
         if (authButtons) authButtons.style.display = "none";
-        if (userProfile) userProfile.style.display = "flex"; // Assuming flex display for profile
+        if (userProfile) userProfile.style.display = "flex"; 
         if (usernameDisplay) usernameDisplay.textContent = user.username;
         if (userEmail) userEmail.textContent = user.email;
 
@@ -450,29 +426,23 @@
           welcomeHeading.innerHTML = `Welcome back, <span class="welcome-user">${user.username}</span>!`;
         }
 
-        // --- Call the function to fetch and update streak ---
         updateUserStreak();
-        // --- End Call ---
 
       } else {
-        // Ensure elements are hidden if no user
         if (streakIndicator) streakIndicator.style.display = 'none';
         if (userProfile) userProfile.style.display = 'none';
-        if (authButtons) authButtons.style.display = 'block'; // Or 'flex', etc.
+        if (authButtons) authButtons.style.display = 'block'; 
       }
 
-      // Toggle profile dropdown
       profileIcon.addEventListener("click", function (e) {
         e.stopPropagation();
         profileDropdown.classList.toggle("show");
       });
 
-      // Close dropdown on outside click
       document.addEventListener("click", function () {
         profileDropdown.classList.remove("show");
       });
 
-      // Logout
       document
         .getElementById("logoutBtn")
         .addEventListener("click", function () {
@@ -483,26 +453,23 @@
 
       if (streakIndicatorNav && streakTargetSection) {
         streakIndicatorNav.addEventListener('click', function (event) {
-          console.log("Navbar streak indicator clicked, scrolling to target section..."); // Debug log
+          console.log("Navbar streak indicator clicked, scrolling to target section..."); 
           streakTargetSection.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
         });
-        // Add cursor pointer for better UX
         streakIndicatorNav.style.cursor = 'pointer';
       } else {
         if (!streakIndicatorNav) console.error("Navbar streak indicator (ID 'streakIndicator') not found.");
         if (!streakTargetSection) console.error("Target streak section (ID 'streak-container') not found.");
       }
 
-      // Star rating selection
       stars.forEach(star => {
         star.addEventListener('click', function () {
           const rating = parseInt(this.getAttribute('data-rating'));
           selectedRating = rating;
 
-          // Update star display
           stars.forEach((s, i) => {
             s.textContent = i < rating ? '★' : '☆';
             s.classList.toggle('active', i < rating);
@@ -510,7 +477,6 @@
         });
       });
 
-      // Submit feedback
       submitBtn.addEventListener('click', async function () {
         if (!selectedRating) {
           alert('Please select a rating');
@@ -546,7 +512,6 @@
 
           alert('Thank you for your feedback!');
           feedbackText.value = '';
-          // Reset stars
           stars.forEach(star => {
             star.textContent = '☆';
             star.classList.remove('active');
@@ -625,16 +590,13 @@
       const sendBtn = document.getElementById('sendBtn');
       const typingIndicator = document.getElementById('typing-indicator');
 
-      // Generate a unique conversation ID
       const conversationId = 'conv-' + Date.now();
       let isMinimized = false;
 
-      // Welcome message
       setTimeout(() => {
         addMessage("Hello! How can I help you today?", false);
       }, 500);
 
-      // Toggle chatbot visibility when clicking the chat button
       chatBtn.addEventListener('click', function () {
         if (isMinimized) {
           chatbotContainer.classList.remove('minimized');
@@ -644,21 +606,17 @@
         }
       });
 
-      // Minimize chatbot
       minimizeBtn.addEventListener('click', function () {
         chatbotContainer.classList.add('minimized');
         isMinimized = true;
       });
 
-      // Close chatbot
       closeBtn.addEventListener('click', function () {
         chatbotContainer.classList.remove('active');
       });
 
-      // Send message when clicking the send button
       sendBtn.addEventListener('click', sendMessage);
 
-      // Send message when pressing Enter
       userInput.addEventListener('keypress', function (e) {
         if (e.key === 'Enter') {
           sendMessage();
@@ -669,16 +627,12 @@
         const message = userInput.value.trim();
         if (!message) return;
 
-        // Add user message to chat
         addMessage(message, true);
 
-        // Clear input
         userInput.value = '';
 
-        // Show typing indicator
         typingIndicator.style.display = 'block';
 
-        // Send to server (CHANGED to port 5001 like your original)
         fetch('http://localhost:5001/chat', {
           method: 'POST',
           headers: {
@@ -691,7 +645,6 @@
         })
           .then(response => {
             if (!response.ok) {
-              // Try to get more specific error from Flask response body
               let errorMsg = `HTTP error! status: ${response.status}`;
               try {
                 const errorData = response.json();
@@ -704,14 +657,11 @@
             return response.json();
           })
           .then(data => {
-            // Hide typing indicator
             typingIndicator.style.display = 'none';
 
-            // Add bot response to chat
             if (data.response) {
               addMessage(data.response, false);
 
-              // Log raw response for debugging
               if (data.raw_response) {
                 console.log("Raw API response:", data.raw_response);
               }
@@ -720,7 +670,6 @@
             }
           })
           .catch(error => {
-            // Hide typing indicator
             typingIndicator.style.display = 'none';
 
             console.error('Error:', error);
@@ -742,10 +691,9 @@
 
         if (!isUser) {
           const avatarImg = document.createElement('img');
-          // Changed to match your original path format
           avatarImg.src = "/static/images/logo.svg";
           avatarImg.alt = 'Bot Avatar';
-          avatarImg.style.width = '40px';  // Increased from 32px
+          avatarImg.style.width = '40px';  
           avatarImg.style.height = '40px';
           messageAvatar.appendChild(avatarImg);
         }
@@ -755,7 +703,6 @@
 
         chatMessages.appendChild(messageDiv);
 
-        // Scroll to the bottom
         chatMessages.scrollTop = chatMessages.scrollHeight;
       }
 
