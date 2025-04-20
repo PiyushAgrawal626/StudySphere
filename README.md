@@ -50,7 +50,7 @@ Once logged in, users are directed to the **Home Page**, which includes a naviga
 
 ### 2️⃣ Assignments & To-do List
 
-- Assignment data is **scraped** from a dummy site hosted on **Vercel** named `consolidated-assignment`.
+- Assignment data is **scraped** from a dummy site hosted on **Vercel** named `consolidated-assignment`.[LINK!](https://github.com/Preygle/consolodated-assignment)
 - It aggregates assignments from:
   - LMS
   - Microsoft Teams
